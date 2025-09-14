@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peep Graphix</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    /* Header with glow effect */
+    header {
+      position: relative;
+      padding: 70px 20px;
+      text-align: center;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* Glowing blobs */
+    header::before, header::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(65,105,225,0.8) 0%, transparent 60%),
+                  radial-gradient(circle, rgba(0,191,255,0.6) 0%, transparent 70%),
+                  radial-gradient(circle, rgba(30,144,255,0.7) 0%, transparent 65%);
+      animation: glowMove 25s infinite linear;
+      filter: blur(100px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header::after {
+      animation-duration: 40s;
+      opacity: 0.5;
+    }
+
+    @keyframes glowMove {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(25%, -25%) rotate(180deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 15px white, 0 0 30px royalblue, 0 0 45px dodgerblue;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      color: #4169e1;
+      margin-top: 30px;
+    }
+    h3 {
+      color: gold;
+      margin-top: 30px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      padding: 10px;
+    }
+    .gallery img {
+      width: 150px;
+      height: auto;
+      border: 2px solid gold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      box-shadow: 0 0 10px gold;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Zoom Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding-top: 50px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.95);
+    }
+    .modal img {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      border: 4px solid white;
+      border-radius: 15px;
+      box-shadow: 0 0 25px royalblue;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: #111;
+      padding: 40px 20px;
+      margin-top: 50px;
+      border-top: 2px solid royalblue;
+    }
+    #contact h2 {
+      color: gold;
+    }
+    #contact p {
+      margin: 8px 0;
+      font-size: 1rem;
+    }
+    #contact strong {
+      color: #4169e1;
+    }
+    #contact .encourage {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 10px royalblue;
+    }
+
+    footer {
+      margin-top: 0;
+      padding: 15px;
+      background: #000;
+      color: #aaa;
+      font-size: 0.9rem;
+      border-top: 1px solid #222;
+    }
+
+    /* Contact Us button in header */
+    .contact-btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      background: royalblue;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-shadow: 0 0 5px black;
+      position: relative;
+      z-index: 1;
+      transition: 0.3s;
+    }
+    .contact-btn:hover {
+      background: dodgerblue;
+      box-shadow: 0 0 15px royalblue;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Peep Graphix</h1>
+    <button class="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+      Contact Us
+    </button>
+  </header>
+
+  <h2>Our Works</h2>
+
+  <!-- Flyers -->
+  <h3>Flyers & Posters</h3>
+  <div class="gallery">
+    <img src="images/flyer1.jpg" alt="Flyer Sample 1" onclick="openModal(this)">
+    <img src="images/flyer2.jpg" alt="Flyer Sample 2" onclick="openModal(this)">
+    <img src="images/flyer3.jpg" alt="Flyer Sample 3" onclick="openModal(this)">
+    <img src="images/flyer4.jpg" alt="Flyer Sample 4" onclick="openModal(this)">
+    <img src="images/flyer5.jpg" alt="Flyer Sample 5" onclick="openModal(this)">
+  </div>
+
+  <!-- Logos -->
+  <h3>Logo Design & Branding</h3>
+  <div class="gallery">
+    <img src="images/logo1.jpg" alt="Logo Sample 1" onclick="openModal(this)">
+    <img src="images/logo2.jpg" alt="Logo Sample 2" onclick="openModal(this)">
+    <img src="images/logo3.jpg" alt="Logo Sample 3" onclick="openModal(this)">
+    <img src="images/logo4.jpg" alt="Logo Sample 4" onclick="openModal(this)">
+    <img src="images/logo5.jpg" alt="Logo Sample 5" onclick="openModal(this)">
+  </div>
+
+  <!-- Business Cards -->
+  <h3>Business Cards</h3>
+  <div class="gallery">
+    <img src="images/card1.jpg" alt="Business Card 1" onclick="openModal(this)">
+    <img src="images/card2.jpg" alt="Business Card 2" onclick="openModal(this)">
+    <img src="images/card3.jpg" alt="Business Card 3" onclick="openModal(this)">
+    <img src="images/card4.jpg" alt="Business Card 4" onclick="openModal(this)">
+  </div>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Location:</strong> 22, Omodigbo, Palm Avenue, Lagos, Nigeria</p>
+    <p><strong>Phone:</strong> +234 812 345 6789</p>
+    <p><strong>Email:</strong> peepgraphix@gmail.com</p>
+    <p class="encourage">Let’s bring your ideas to life with creative designs that stand out!</p>
+  </section>
+
+  <!-- Zoom Modal -->
+  <div id="myModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img id="modalImage">
+  </div>
+
+  <footer>
+    &copy; 2025 Peep Graphix – Creativity Meets Excellence.
+  </footer>
+
+  <script>
+    function openModal(img) {
+      document.getElementById("myModal").style.display = "block";
+      document.getElementById("modalImage").src = img.src;
+    }
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
